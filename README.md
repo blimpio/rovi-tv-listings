@@ -32,7 +32,7 @@ rovi.celebrity_details(name_id='100614')
 This is a totally un-official project and Rovi Corporation is not involved in any way. We made this to make our work easier and decided to share it.
 
 ## Bug tracker
-Have a bug? Please create an issue here on GitHub!
+Have a bug? Please [create an issue here on GitHub](https://github.com/GetBlimp/rovi-tv-listings/issues)!
 
 ## License
 All of rovi-tv-listings is licensed under the MIT license.
