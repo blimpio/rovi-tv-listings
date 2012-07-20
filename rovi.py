@@ -11,14 +11,20 @@ CELEBRITY_DETAILS_URL = '/celebritydetails'
 
 
 class RoviClient(object):
+    '''
+    Python Wrapper for Rovi TV Listings API
+
+    Rovi TV Listings returns international television schedules, plus data and
+    images for programs and celebrities.
+    '''
     def __init__(self, *args, **kwargs):
         self.api_key = kwargs.get('api_key')
         self.use_https = kwargs.get('use_https', False)
         self.format = kwargs.get('format', 'json')
         self.locale = kwargs.get('locale', 'en-US')
 
-        if self.api_key is None:
-            raise RoviMissingApiKeyException
+        if self.api_key is None or self.api_key == 'CHANGE-ME':
+            raise RoviMissingApiKeyException('Get api key from: http://developer.rovicorp.com/page/Get_Started')
 
         if self.use_https:
             self.protocol = 'https://'
@@ -314,10 +320,10 @@ class RoviMissingArgumentsException(Exception):
 
 
 if __name__ == '__main__':
-    rovi = RoviClient(api_key='xxxxxxxxxxxxxxxxxxxxxxxx')
+    rovi = RoviClient(api_key='CHANGE-ME')
     print rovi.services(postal_code='00911', country_code='US')
-    # print rovi.service_details(service_id='361032')
-    # print rovi.service_details(service_id='361032')
-    # print rovi.grid_schedule(service_id='361032')
-    # print rovi.program_details(program_id='4258917')
-    # print rovi.celebrity_details(name_id='100614')
+    print rovi.service_details(service_id='361032')
+    print rovi.service_details(service_id='361032')
+    print rovi.grid_schedule(service_id='361032')
+    print rovi.program_details(program_id='4258917')
+    print rovi.celebrity_details(name_id='100614')
