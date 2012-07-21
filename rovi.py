@@ -36,7 +36,7 @@ class RoviClient(object):
         Returns a list of the television service offerings for an area.
         '''
         postal_code = kwargs.get('postal_code')
-        locale = kwargs.get('locale')
+        locale = kwargs.get('locale', self.locale)
         country_code = kwargs.get('country_code')
         msoid = kwargs.get('msoid')
 
