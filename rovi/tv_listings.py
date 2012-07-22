@@ -1,5 +1,5 @@
 from .client import RoviClient
-from .exceptions import RoviMissingArgumentsException
+from exceptions import RoviMissingArgumentsException
 
 import json
 import requests
@@ -14,6 +14,12 @@ CELEBRITY_DETAILS_URL = '/celebritydetails'
 
 
 class TVListings(RoviClient):
+    '''
+    Python Wrapper for Rovi TV Listings API
+
+    Rovi TV Listings returns international television schedules, plus data and
+    images for programs and celebrities.
+    '''
     def services(self, *args, **kwargs):
         '''
         Returns a list of the television service offerings for an area.

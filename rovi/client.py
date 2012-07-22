@@ -2,12 +2,7 @@ from .exceptions import RoviMissingApiKeyException
 
 
 class RoviClient(object):
-    '''
-    Python Wrapper for Rovi TV Listings API
 
-    Rovi TV Listings returns international television schedules, plus data and
-    images for programs and celebrities.
-    '''
     def __init__(self, *args, **kwargs):
         self.api_key = kwargs.get('api_key')
         self.use_https = kwargs.get('use_https', False)
