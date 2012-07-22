@@ -1,5 +1,8 @@
-import requests
+from .client import RoviClient
+from exceptions import RoviMissingArgumentsException
+
 import json
+import requests
 
 BASE_URL = 'api.rovicorp.com/TVlistings/v9/listings'
 SERVICES_URL = '/services'
@@ -10,42 +13,28 @@ PROGRAM_DETAILS_URL = '/programdetails'
 CELEBRITY_DETAILS_URL = '/celebritydetails'
 
 
-class RoviClient(object):
+class TVListings(RoviClient):
     '''
     Python Wrapper for Rovi TV Listings API
 
     Rovi TV Listings returns international television schedules, plus data and
     images for programs and celebrities.
     '''
-    def __init__(self, *args, **kwargs):
-        self.api_key = kwargs.get('api_key')
-        self.use_https = kwargs.get('use_https', False)
-        self.format = kwargs.get('format', 'json')
-        self.locale = kwargs.get('locale', 'en-US')
-
-        if self.api_key is None or self.api_key == 'CHANGE-ME':
-            raise RoviMissingApiKeyException('Get api key from: http://developer.rovicorp.com/page/Get_Started')
-
-        if self.use_https:
-            self.protocol = 'https://'
-        else:
-            self.protocol = 'http://'
-
     def services(self, *args, **kwargs):
         '''
         Returns a list of the television service offerings for an area.
         '''
         postal_code = kwargs.get('postal_code')
-        locale = kwargs.get('locale')
+        locale = kwargs.get('locale', self.locale)
         country_code = kwargs.get('country_code')
         msoid = kwargs.get('msoid')
 
-        if None in [postal_code, locale, country_code]:
-            raise RoviMissingArgumentsException('Required Args: postal_code, locale, country_code')
+        if None in [postal_code, country_code]:
+            raise RoviMissingArgumentsException('Required Args: postal_code, country_code')
 
         payload = {
             'apikey': self.api_key,
-            'locale': self.locale,
+            'locale': locale,
             'format': self.format,
             'countrycode': country_code
         }
@@ -308,22 +297,3 @@ class RoviClient(object):
         request_url = self.protocol + BASE_URL + CELEBRITY_DETAILS_URL + '/info'
         r = requests.get(request_url, params=payload)
         return json.loads(r.text)
-
-
-# Exceptions
-class RoviMissingApiKeyException(Exception):
-    pass
-
-
-class RoviMissingArgumentsException(Exception):
-    pass
-
-
-if __name__ == '__main__':
-    rovi = RoviClient(api_key='CHANGE-ME')
-    print rovi.services(postal_code='00911', country_code='US')
-    print rovi.service_details(service_id='361032')
-    print rovi.service_details(service_id='361032')
-    print rovi.grid_schedule(service_id='361032')
-    print rovi.program_details(program_id='4258917')
-    print rovi.celebrity_details(name_id='100614')
