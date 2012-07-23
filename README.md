@@ -14,15 +14,15 @@ Rovi TV Listings returns international television schedules, plus data and image
 
 ## Examples
 ```
-rovi = RoviClient(api_key='xxxxxxxxxxxxxxxxxxxxxxxx')
+from rovi.tv_listings import TVListings
 
-rovi.services(postal_code='00911', country_code='US')
-rovi.service_details(service_id='361032')
-rovi.service_details(service_id='361032')
-rovi.grid_schedule(service_id='361032')
-rovi.program_details(program_id='4258917')
-rovi.celebrity_details(name_id='100614')
-
+tv_listings = TVListings(api_key='CHANGE-ME')
+print tv_listings.services(postal_code='00911', country_code='US')
+print tv_listings.service_details(service_id='361032')
+print tv_listings.service_details(service_id='361032')
+print tv_listings.grid_schedule(service_id='361032')
+print tv_listings.program_details(program_id='4258917')
+print tv_listings.celebrity_details(name_id='100614')
 ```
 
 ## API Key
