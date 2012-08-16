@@ -88,7 +88,7 @@ class TVListings(RoviClient):
         service_id = kwargs.get('service_id')
         duration = kwargs.get('duration', 1)
         in_progress = kwargs.get('in_progress', False)
-        one_airing_per_source_id = kwargs('one_airing_per_source_id', False)
+        one_airing_per_source_id = kwargs.get('one_airing_per_source_id', False)
         source_id = kwargs.get('source_id')
         start_date = kwargs.get('start_date')
 
