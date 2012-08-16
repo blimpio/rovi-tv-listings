@@ -12,6 +12,11 @@ Rovi TV Listings returns international television schedules, plus data and image
 * **program_details**: Information about a series, episode, or program, plus a schedule of upcoming broadcasts.
 * **celebrity_details**: Information about a celebrity, plus a schedule of upcoming broadcasts the celebrity appears in.
 
+## Installation
+```
+$ pip install python-rovi
+```
+
 ## Examples
 ```
 from rovi.tv_listings import TVListings
