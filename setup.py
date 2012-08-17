@@ -9,7 +9,7 @@ setup(
     name='python-rovi',
     description='Python Wrapper for Rovi TV Listings API',
     license='MIT License',
-    version='0.0.2',
+    version='0.0.3',
     zip_safe=False,
     platforms='any',
     packages=['rovi'],
