@@ -225,7 +225,10 @@ class TVListings(RoviClient):
         if start_date is not None:
             payload['startdate'] = start_date
 
-        request_url = self.protocol + BASE_URL + PROGRAM_DETAILS_URL + '/' + program_id + '/info'
+        if service_id is not None:
+            request_url = self.protocol + BASE_URL + PROGRAM_DETAILS_URL + '/' + service_id + '/' + program_id + '/info'
+        else:
+            request_url = self.protocol + BASE_URL + PROGRAM_DETAILS_URL + '/' + program_id + '/info'
         r = requests.get(request_url, params=payload)
         return json.loads(r.text)
 
