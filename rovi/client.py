@@ -1,3 +1,5 @@
+import requests
+
 from .exceptions import RoviMissingApiKeyException
 
 
@@ -16,3 +18,6 @@ class RoviClient(object):
             self.protocol = 'https://'
         else:
             self.protocol = 'http://'
+
+        # Use single session so that keep-alive works.
+        self.session = requests.Session()
