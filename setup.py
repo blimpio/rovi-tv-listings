@@ -14,7 +14,7 @@ setup(
     platforms='any',
     packages=['rovi'],
     install_requires=[
-        'requests>=0.13.3',
+        'requests>=1.0.0',
     ],
 
     author='Giovanni Collazo',

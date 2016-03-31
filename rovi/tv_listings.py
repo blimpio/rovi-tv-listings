@@ -1,9 +1,6 @@
 from .client import RoviClient
 from exceptions import RoviMissingArgumentsException
 
-import json
-import requests
-
 BASE_URL = 'api.rovicorp.com/TVlistings/v9/listings'
 SERVICES_URL = '/services'
 SERVICE_DETAILS_URL = '/servicedetails'
@@ -43,8 +40,9 @@ class TVListings(RoviClient):
             payload['msoid'] = msoid
 
         request_url = self.protocol + BASE_URL + SERVICES_URL + '/postalcode/' + postal_code + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
 
     def service_details(self, *args, **kwargs):
         '''
@@ -77,8 +75,9 @@ class TVListings(RoviClient):
             payload['imageverticalresolution'] = image_vertical_resolution
 
         request_url = self.protocol + BASE_URL + SERVICE_DETAILS_URL + '/serviceid/' + service_id + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
 
     def linear_schedule(self, *args, **kwargs):
         '''
@@ -111,8 +110,9 @@ class TVListings(RoviClient):
             payload['startdate'] = start_date
 
         request_url = self.protocol + BASE_URL + LINEAR_SCHEDULE_URL + '/' + service_id + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
 
     def grid_schedule(self, *args, **kwargs):
         '''
@@ -159,8 +159,9 @@ class TVListings(RoviClient):
             payload['titletype'] = title_type
 
         request_url = self.protocol + BASE_URL + GRID_SCHEDULE_URL + '/' + service_id + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
 
     def program_details(self, *args, **kwargs):
         '''
@@ -229,8 +230,9 @@ class TVListings(RoviClient):
             request_url = self.protocol + BASE_URL + PROGRAM_DETAILS_URL + '/' + service_id + '/' + program_id + '/info'
         else:
             request_url = self.protocol + BASE_URL + PROGRAM_DETAILS_URL + '/' + program_id + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
 
     def celebrity_details(self, *args, **kwargs):
         '''
@@ -298,5 +300,6 @@ class TVListings(RoviClient):
             payload['startdate'] = start_date
 
         request_url = self.protocol + BASE_URL + CELEBRITY_DETAILS_URL + '/info'
-        r = requests.get(request_url, params=payload)
-        return json.loads(r.text)
+        r = self.session.get(request_url, params=payload)
+        r.raise_for_status()
+        return r.json()
